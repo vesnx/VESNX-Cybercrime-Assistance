@@ -1,5 +1,5 @@
 # VESNX Cybercrime Assistance Schema
-![Logo](https:raw.githubusercontent.com/vesnx/VESNX-Cybercrime-Assistance/doc/care-logo.png)
+![Logo](https://github.com/vesnx/VESNX-Cybercrime-Assistance/blob/main/Doc/care-logo.png)
 
 The VESNX Cybercrime Assistance Schema is part of the VESNX C.A.R.E. (Cybercrime Assistance and Legal Representation) project. This repository contains a collection of standardized data objects designed to bridge the gap between abuse victims and the legal community. It aims to streamline the process of reporting and addressing cybercrime incidents by providing clear and structured formats for sharing information.
 
