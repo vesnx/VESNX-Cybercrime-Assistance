@@ -5,7 +5,8 @@
   "properties": {
     "Ticket": {
       "description": "Unique identifier for the ticket  (GUID)",
-      "type": "string"
+      "type": "string",
+      "pattern": "^(\\{){0,1}[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}(\\}){0,1}$"
     },
     "Recorded-UTC": {
       "description": "The date the abuse was recorded",
@@ -15,6 +16,13 @@
     "Source-ip": {
       "description": "The IP address that is causing the abuse",
       "type": "string"
+    },
+    "MITRE-Tactics": {
+      "description": "Tactics represent the \"why\" of an ATT&CK technique or sub-technique. It is the adversary's tactical goal: the reason for performing an action. For example, an adversary may want to achieve credential access.",
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "Destination-ip": {
       "description": "The IP address that is being abused",
@@ -228,6 +236,7 @@
     "Ticket",
     "Recorded-UTC",
     "Source-ip",
+    "MITRE-Tactics",
     "Destination-ip",
     "Destination-Country-Code-Numeric",
     "Attack-Type",
