@@ -1,112 +1,8 @@
 {
   "title": "AbuseReport data exchange",
   "description": "AbuseReport is a class by VESNX Project C.A.R.E. with the data format that will allow a abused service to get legal representation from the legal community as jurisdictions and computer crimes acts can be described.",
-  "type": "object",
-  "properties": {
-    "Ticket": {
-      "description": "Unique identifier for the ticket  (GUID)",
-      "type": "string",
-      "pattern": "^(\\{){0,1}[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}(\\}){0,1}$"
-    },
-    "Recorded-UTC": {
-      "description": "The date the abuse was recorded",
-      "type": "string",
-      "format": "date-time"
-    },
-    "Source-ip": {
-      "description": "The IP address that is causing the abuse",
-      "type": "string"
-    },
-    "MITRE-Tactics": {
-      "description": "Tactics represent the \"why\" of an ATT&CK technique or sub-technique. It is the adversary's tactical goal: the reason for performing an action. For example, an adversary may want to achieve credential access.",
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "Destination-ip": {
-      "description": "The IP address that is being abused",
-      "type": "string"
-    },
-    "Destination-Country-Code-Numeric": {
-      "description": "Contains the numeric ISO code of the country where the abused IP address is hosted. See https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes",
-      "type": "integer",
-      "default": 0
-    },
-    "Attack-Type": {
-      "description": "Free text concerning the type of attack",
-      "type": [
-        "string",
-        "null"
-      ],
-      "minLength": 10,
-      "maxLength": 50
-    },
-    "Uri-Schema": {
-      "description": "If set, the abuse is URL-based, and this represents the schema of the URI",
-      "type": [
-        "string",
-        "null"
-      ],
-      "minLength": 0,
-      "maxLength": 10
-    },
-    "Uri-Host": {
-      "description": "If set, the abuse is URL-based, and this represents the host part of the URI",
-      "type": [
-        "string",
-        "null"
-      ],
-      "minLength": 0,
-      "maxLength": 90
-    },
-    "Port": {
-      "description": "Port number being abused",
-      "type": "integer",
-      "minimum": 0.0,
-      "maximum": 65535.0
-    },
-    "Uri-Path": {
-      "description": "If set, the abuse is URL-based, and this represents the path part of the URI",
-      "type": [
-        "string",
-        "null"
-      ],
-      "minLength": 0,
-      "maxLength": 255
-    },
-    "Uri-Query": {
-      "description": "If set, the abuse is URL-based, and this represents the query part of the URI",
-      "type": [
-        "string",
-        "null"
-      ],
-      "minLength": 0,
-      "maxLength": 1024
-    },
-    "Http-Method": {
-      "description": "If set, the abuse is URL-based, and this represents the HTTP method like GET, POST, HEAD...",
-      "type": [
-        "string",
-        "null"
-      ],
-      "minLength": 0,
-      "maxLength": 7
-    },
-    "Http-Headers": {
-      "description": "Request header dictionary if the abuse report is reporting a web-based exploit containing header key and header value",
-      "type": [
-        "object",
-        "null"
-      ],
-      "additionalProperties": {
-        "type": [
-          "string",
-          "null"
-        ]
-      }
-    },
-    "Http-Cookies": {
+  "definitions": {
+    "Dictionary<String, String>": {
       "description": "Cookie dictionary if the abuse report is reporting a web-based exploit, and a cookie-based attack is reported, the dictionary contain cookie value name and value key pairs",
       "type": [
         "object",
@@ -119,7 +15,7 @@
         ]
       }
     },
-    "Http-Form": {
+    "Dictionary<String, String>-1": {
       "description": "A dictionary if a form is used in the abuse for web-based attacks. The dictionary contain form field and value key pairs",
       "type": [
         "object",
@@ -132,22 +28,23 @@
         ]
       }
     },
-    "Body": {
-      "description": "The raw body content reported: if the report is web-based, it's the raw HTTP body; if a mail-based abuse, it contains the raw mail body; if a socket-based attack, it contains the raw socket data. Essentially, this contains the raw attack/abuse exploit in the abuse.",
-      "type": "string",
-      "minLength": 0,
-      "maxLength": 4096
-    },
-    "Content-Type": {
-      "description": "The content type being reported in the body of this abuse report",
+    "Dictionary<String, String>-2": {
+      "description": "Request header dictionary if the abuse report is reporting a web-based exploit containing header key and header value",
       "type": [
-        "string",
+        "object",
         "null"
       ],
-      "minLength": 5,
-      "maxLength": 50
-    },
-    "Abuse-Email": {
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "abuse-Email": {
       "description": "The email address the abuse report is sent to",
       "type": [
         "string",
@@ -157,16 +54,62 @@
       "maxLength": 90,
       "format": "email"
     },
-    "Email-Subject": {
-      "description": "Subject line of mail based abuse reports, this should reflect the actual subject line of the email",
+    "asn": {
+      "description": "The name of the internet service provider that hosts the abusing IP address",
       "type": [
         "string",
         "null"
       ],
       "minLength": 0,
-      "maxLength": 255
+      "maxLength": 50
     },
-    "Email-ReplyAddress": {
+    "attack-Type": {
+      "description": "Free text concerning the type of attack",
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 10,
+      "maxLength": 50
+    },
+    "body": {
+      "description": "The raw body content reported: if the report is web-based, it's the raw HTTP body; if a mail-based abuse, it contains the raw mail body; if a socket-based attack, it contains the raw socket data. Essentially, this contains the raw attack/abuse exploit in the abuse.",
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 4096
+    },
+    "content-Type": {
+      "description": "The content type being reported in the body of this abuse report",
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 5,
+      "maxLength": 50
+    },
+    "destination-Country-Code-Alpha": {
+      "description": "Two-letter country of the code of the country where the abused IP address is hosted. See https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "destination-Country-Code-Numeric": {
+      "description": "Contains the numeric ISO code of the country where the abused IP address is hosted. See https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes",
+      "type": "integer",
+      "default": 0
+    },
+    "destination-ip": {
+      "description": "The IP address that is being abused",
+      "type": "string"
+    },
+    "email-MailBody-Has-Links": {
+      "description": "Indicates whether the body of the email-based abuse report contains hyper links. This could include hyper links in an abused web application contact form, as well as hyper links in emails. These hyper links may indicate drive-by infections, phishing, or scams.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "email-ReplyAddress": {
       "description": "The reply-to email address for receiving replies or follow-ups in regards to the abuse report.",
       "type": [
         "string",
@@ -176,46 +119,121 @@
       "maxLength": 90,
       "format": "email"
     },
-    "Email-MailBody-Has-Links": {
-      "description": "Indicates whether the body of the email-based abuse report contains hyperlinks. This could include hyperlinks in an abused web application contact form, as well as hyperlinks in emails. These hyperlinks may indicate drive-by infections, phishing, or scams.",
+    "email-Subject": {
+      "description": "Subject line of mail based abuse reports, this should reflect the actual subject line of the email",
       "type": [
-        "boolean",
+        "string",
         "null"
-      ]
+      ],
+      "minLength": 0,
+      "maxLength": 255
     },
-    "Reported-To-Isp": {
-      "description": "Indicates if the abuse has been reported to the internet service provider",
-      "type": "boolean",
-      "default": true
+    "exploit": {
+      "description": "An explanation of why you feel this is a valid abuse report and contains the legal & forensic details not covered by the properties of the abuse report object",
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 4096
     },
-    "Incident-Title": {
+    "http-Cookies": {
+      "$ref": "#/definitions/Dictionary<String, String>"
+    },
+    "http-Form": {
+      "$ref": "#/definitions/Dictionary<String, String>-1"
+    },
+    "http-Headers": {
+      "$ref": "#/definitions/Dictionary<String, String>-2"
+    },
+    "http-Method": {
+      "description": "If set, the abuse is URL-based, and this represents the HTTP method like GET, POST, HEAD...",
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 0,
+      "maxLength": 7
+    },
+    "incident-Title": {
       "description": "The title of the abuse report, similar to the subject of an email, and should have a brief explanation of what is being reported",
       "type": "string",
       "default": "",
       "minLength": 10,
       "maxLength": 255
     },
-    "Exploit": {
-      "description": "An explanation of why you feel this is a valid abuse report and contains the legal & forensic details not covered by the properties of the abuse report object",
-      "type": "string",
-      "minLength": 10,
-      "maxLength": 4096
-    },
-    "Source-Country-Code-Numeric": {
-      "description": "Contains the numeric ISO code of the country, see https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes",
-      "type": "integer",
-      "default": 0
-    },
-    "ASN": {
-      "description": "The name of the internet service provider that hosts the abusing IP address",
+    "mitrE-Tactics": {
+      "description": "Tactics represent the \"why\" of an ATT&CK technique or sub-technique. It is the adversary's tactical goal: the reason for performing an action. For example, an adversary may want to achieve credential access.",
       "type": [
         "string",
         "null"
-      ],
-      "minLength": 0,
-      "maxLength": 50
+      ]
     },
-    "Source-Country-Code-Alpha": {
+    "port": {
+      "description": "Port number being abused",
+      "type": "integer",
+      "minimum": 0.0,
+      "maximum": 65535.0
+    },
+    "reasonFlag": {
+      "description": "The reason the WALTER framework decided to trigger the block activity",
+      "type": "string",
+      "default": "MaliciousUser",
+      "enum": [
+        "None",
+        "DeliberateManipulation",
+        "HoneyPotTrap",
+        "HeaderManipulations",
+        "UserEncryptionManipulations",
+        "UserSessionManipulations",
+        "PageRereshFishing",
+        "CookieManipulations",
+        "ProxyUser",
+        "PenetrationAttempt",
+        "RepeatedBlockedRequest",
+        "NoAccessFromRegion",
+        "WrongUserGroup",
+        "ScrubbingDetected",
+        "UserIdFaulty",
+        "WrongUserId",
+        "SimulatedDevice",
+        "DataValidationError",
+        "DataExfiltration",
+        "UserGeneratedRejection",
+        "AddhockFileAccessDetected",
+        "CrossSiteRequestRejected",
+        "DataSubscription",
+        "MaliciousUser",
+        "DeveloperTools",
+        "BlockedUserGroup",
+        "MaximumViolationsDetected",
+        "PhishyRequest",
+        "AgentsConsideredMalicious",
+        "NoAccessOutsideofRenderedLinks",
+        "DenailOfService",
+        "DenySystemAccess",
+        "AttemptToAccessSystemFiles",
+        "AttemptOnPluginConfiguration",
+        "AttemptToAccessSiteUsingTheTechnologyStack",
+        "AttemptToAccessSiteBackup",
+        "RequestPoisoningDetected",
+        "HoneyPotSocketDetected",
+        "CommonVulnerabilitiesExposuresExploitDetected",
+        "ALL",
+        "PortScan",
+        "UnsafeDevice",
+        "QueryStringManipulation",
+        "ResetAttack"
+      ]
+    },
+    "recorded-UTC": {
+      "description": "The date the abuse was recorded",
+      "type": "string",
+      "format": "date-time"
+    },
+    "reported-To-Isp": {
+      "description": "Indicates if the abuse has been reported to the internet service provider",
+      "type": "boolean",
+      "default": true
+    },
+    "source-Country-Code-Alpha": {
       "description": "Two-letter country code of the country, see https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes",
       "type": [
         "string",
@@ -225,39 +243,84 @@
       "minLength": 2,
       "maxLength": 2
     },
-    "Destination-Country-Code-Alpha": {
-      "description": "Two-letter country of the code of the country where the abused IP address is hosted. See https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes",
+    "source-Country-Code-Numeric": {
+      "description": "Contains the numeric ISO code of the country, see https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes",
+      "type": "integer",
+      "default": 0
+    },
+    "source-ip": {
+      "description": "The IP address that is causing the abuse",
+      "type": "string"
+    },
+    "ticket": {
+      "description": "Unique identifier for the ticket  (GUID)",
       "type": "string",
-      "minLength": 2,
-      "maxLength": 2
+      "pattern": "^(\\{){0,1}[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}(\\}){0,1}$"
+    },
+    "uri-Host": {
+      "description": "If set, the abuse is URL-based, and this represents the host part of the URI",
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 0,
+      "maxLength": 90
+    },
+    "uri-Path": {
+      "description": "If set, the abuse is URL-based, and this represents the path part of the URI",
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "uri-Query": {
+      "description": "If set, the abuse is URL-based, and this represents the query part of the URI",
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 0,
+      "maxLength": 1024
+    },
+    "uri-Schema": {
+      "description": "If set, the abuse is URL-based, and this represents the schema of the URI",
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 0,
+      "maxLength": 10
     }
   },
   "required": [
-    "Ticket",
-    "Recorded-UTC",
-    "Source-ip",
-    "MITRE-Tactics",
-    "Destination-ip",
-    "Destination-Country-Code-Numeric",
-    "Attack-Type",
-    "Uri-Schema",
-    "Uri-Host",
-    "Port",
-    "Uri-Path",
-    "Uri-Query",
-    "Http-Method",
-    "Body",
-    "Content-Type",
-    "Abuse-Email",
-    "Email-Subject",
-    "Email-ReplyAddress",
-    "Email-MailBody-Has-Links",
-    "Reported-To-Isp",
-    "Incident-Title",
-    "Exploit",
-    "Source-Country-Code-Numeric",
-    "ASN",
-    "Source-Country-Code-Alpha",
-    "Destination-Country-Code-Alpha"
+    "abuse-Email",
+    "asn",
+    "attack-Type",
+    "body",
+    "content-Type",
+    "destination-Country-Code-Alpha",
+    "destination-Country-Code-Numeric",
+    "destination-ip",
+    "email-MailBody-Has-Links",
+    "email-ReplyAddress",
+    "email-Subject",
+    "exploit",
+    "http-Method",
+    "incident-Title",
+    "mitrE-Tactics",
+    "port",
+    "reasonFlag",
+    "recorded-UTC",
+    "reported-To-Isp",
+    "source-Country-Code-Alpha",
+    "source-Country-Code-Numeric",
+    "source-ip",
+    "ticket",
+    "uri-Host",
+    "uri-Path",
+    "uri-Query",
+    "uri-Schema"
   ]
 }
