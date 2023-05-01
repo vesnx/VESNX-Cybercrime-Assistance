@@ -9,8 +9,8 @@ Facilitates efficient collaboration between victims and the legal community
 Streamlines the process of reporting cybercrime incidents
 Provides a clear and structured format for sharing information
 
-##Objects
-AbuseReport: A comprehensive object that includes essential details about the abuse incident, such as the source and destination IP addresses, attack type, and more.
+##Objects AbuseReport: 
+A comprehensive object that includes essential details about the abuse incident, such as the source and destination IP addresses, attack type, and more.
 More objects will be added in the future.
 
 ##Usage
