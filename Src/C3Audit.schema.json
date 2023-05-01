@@ -1,0 +1,184 @@
+{
+  "definitions": {
+    "Dictionary<String, String>": {
+      "description": "The cookies submitted with the request, the cookie  key-value dictionary of the request if a web based attack as detected",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "Dictionary<String, String>-1": {
+      "description": "The header key-value dictionary of the request if a web based attack as detected",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "abuseTicket": {
+      "description": "The Abuse Ticket ID that this audit entry belong to",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "body": {
+      "description": "The body content submitted with the request, this could be a HTTP request body, email body or socket stream, depending on the exploit",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cookies": {
+      "$ref": "#/definitions/Dictionary<String, String>"
+    },
+    "description": {
+      "description": "The detected abuse attack pattern, considering all penetration attempts detected",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dmzTicket": {
+      "description": "The Ticket ID of the DMZ indecent Entry that controls the firewall rule and it's expiry date.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "expiresUtc": {
+      "description": "The default expiration date and time for the detection to expire and future request are considered to be a new abuse",
+      "type": "string",
+      "format": "date-time"
+    },
+    "headers": {
+      "$ref": "#/definitions/Dictionary<String, String>-1"
+    },
+    "httpMethod": {
+      "description": "The HTTP method used for the request, or null if not a URL based abuse",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "localAddress": {
+      "description": "The local IP address of the server that received the request",
+      "type": "string"
+    },
+    "localPort": {
+      "description": "The local port on which the request was received",
+      "type": "integer",
+      "default": 0
+    },
+    "mitre": {
+      "description": "The MITRE tactics and techniques associated with this request",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "newExploit": {
+      "description": "The exploit detected on this request, if an exploit was detected",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reasonFlag": {
+      "description": "The reason the WALTER framework decided to trigger the block activity",
+      "type": "string",
+      "default": "MaliciousUser",
+      "enum": [
+        "None",
+        "DeliberateManipulation",
+        "HoneyPotTrap",
+        "HeaderManipulations",
+        "UserEncryptionManipulations",
+        "UserSessionManipulations",
+        "PageRereshFishing",
+        "CookieManipulations",
+        "ProxyUser",
+        "PenetrationAttempt",
+        "RepeatedBlockedRequest",
+        "NoAccessFromRegion",
+        "WrongUserGroup",
+        "ScrubbingDetected",
+        "UserIdFaulty",
+        "WrongUserId",
+        "SimulatedDevice",
+        "DataValidationError",
+        "DataExfiltration",
+        "UserGeneratedRejection",
+        "AddhockFileAccessDetected",
+        "CrossSiteRequestRejected",
+        "DataSubscription",
+        "MaliciousUser",
+        "DeveloperTools",
+        "BlockedUserGroup",
+        "MaximumViolationsDetected",
+        "PhishyRequest",
+        "AgentsConsideredMalicious",
+        "NoAccessOutsideofRenderedLinks",
+        "DenailOfService",
+        "DenySystemAccess",
+        "AttemptToAccessSystemFiles",
+        "AttemptOnPluginConfiguration",
+        "AttemptToAccessSiteUsingTheTechnologyStack",
+        "AttemptToAccessSiteBackup",
+        "RequestPoisoningDetected",
+        "HoneyPotSocketDetected",
+        "CommonVulnerabilitiesExposuresExploitDetected",
+        "ALL",
+        "PortScan",
+        "UnsafeDevice",
+        "QueryStringManipulation",
+        "ResetAttack"
+      ]
+    },
+    "remoteAddress": {
+      "description": "The remote IP address from which the request or attack was sent",
+      "type": "string"
+    },
+    "remotePort": {
+      "description": "The remote port from which the request was sent",
+      "type": "integer"
+    },
+    "requestUtc": {
+      "description": "The UTC date and time of the request or attack against the system",
+      "type": "string",
+      "format": "date-time"
+    },
+    "ticket": {
+      "description": "Unique identifier for the C3 ticket (GUID)",
+      "type": "string"
+    },
+    "uri": {
+      "description": "The URL of the request if the request involved a URL type, will be null for email or socket abuse",
+      "type": "string"
+    }
+  },
+  "required": [
+    "expiresUtc",
+    "httpMethod",
+    "localAddress",
+    "reasonFlag",
+    "remoteAddress",
+    "remotePort",
+    "requestUtc",
+    "ticket"
+  ]
+}
