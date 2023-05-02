@@ -138,6 +138,12 @@ When adding items:
 - Use the applicable law knowledge base entry that's associated with the abuse
 - Consider that the applicable law knowledge base is a living community; data will get updated, and your contributions will help the community to be more knowledgeable
 
+
+## Project CARE Knowledge Base Editor
+
+You can get a knowledge base editor when purchasing a business version of IDPS. See https://www.vesnx.com for more details or contact support at support@vesnx.com. Please note that the Project CARE Knowledge Base Editor and Viewer will work on Windows 10 / Windows Server 2016 or later only.
+
+
 ## Glossary
 
 ### FullPath
